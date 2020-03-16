@@ -62,7 +62,6 @@ double cal_math(queue<string>& save_math) {
     vector<double> save_stack;
     for (; !save_math.empty(); save_math.pop()) {
         string str = save_math.front();
-        cout << str << endl;
         regex reg_number("([0-9]+)[.]*([0-9]*)");
         if (regex_match(str, reg_number)) {
             save_stack.push_back(atof(str.c_str()));
