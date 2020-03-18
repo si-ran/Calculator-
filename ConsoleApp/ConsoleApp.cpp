@@ -24,11 +24,14 @@ int op_pri(string op) {
     }
 }
 
+
+// 将操作符存入运算符栈save_stack,判断优先级，输出到后缀表达式save_match
 bool get_math(string str, queue<string>& save_match) {
     vector<string> save_stack;
+    // 设置'#'为运算符栈的栈底元素
     save_stack.push_back("#");
-    //regex reg_all("^(((?<o>\()[-+]?([0-9]+[-+*/])*)+[0-9]+((?<-o>\))([-+*/][0-9]+)*)+($|[-+*/]))*(?(o)(?!))$");
-    regex reg_all("(([0-9]+)[.]*([0-9]*))(([0-9]+)[.]*([0-9]*)|[+*/)(-])*(([0-9]+)[.]*([0-9]*))");
+    // regex reg_all("^(((?<o>\()[-+]?([0-9]+[-+*/])*)+[0-9]+((?<-o>\))([-+*/][0-9]+)*)+($|[-+*/]))*(?(o)(?!))$");
+    regex reg_all("(([0-9]+)[.]*([0-9]*))(([0-9]+)[.]*([0-9]*)|[+*/-])*(([0-9]+)[.]*([0-9]*))");
     if (regex_match(str, reg_all)) {
         regex reg("((([0-9]+)([.]*)([0-9]*))|[+*/)(-])");
         smatch str_match;
@@ -57,6 +60,7 @@ bool get_math(string str, queue<string>& save_match) {
     }
 }
 
+// 后缀表达式计算
 double cal_math(queue<string>& save_math) {
     double res = 0;
     vector<double> save_stack;
